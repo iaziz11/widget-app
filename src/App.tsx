@@ -8,11 +8,12 @@ import "react-resizable/css/styles.css";
 import Switch from "@mui/material/Switch";
 import TimeWidget from "./ui/widgets/TimeWidget";
 import CalendarWidget from "./ui/widgets/CalendarWidget";
+import LinkWidget from "./ui/widgets/LinkWidget";
 
 const initialLayout = [
   { i: "clock", x: 0, y: 0, w: 5, h: 3, minW: 5, minH: 3 },
   { i: "calendar", x: 10, y: 0, w: 6, h: 7, isResizable: false },
-  { i: "youtube", x: 0, y: 2, w: 8, h: 3 },
+  { i: "links", x: 0, y: 8, w: 4, h: 3 },
 ];
 
 function App() {
@@ -87,6 +88,13 @@ function App() {
             </div>
             <div key="calendar">
               <CalendarWidget
+                primaryColor="blue"
+                secondaryColor="white"
+                textColor="white"
+              />
+            </div>
+            <div key="links">
+              <LinkWidget
                 primaryColor="blue"
                 secondaryColor="white"
                 textColor="white"

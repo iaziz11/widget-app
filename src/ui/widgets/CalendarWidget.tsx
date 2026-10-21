@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { formatTime } from "../../utils/formatTime.ts";
+import { baseWidgetStyle } from "../styles/BaseWidgetStyle.ts";
 
 interface CalendarWidgetProps {
   primaryColor: string;
@@ -27,15 +28,12 @@ export default function CalendarWidget({
 
   const styles: Record<string, CSSProperties> = {
     container: {
-      width: "100%",
+      ...baseWidgetStyle,
       boxSizing: "border-box",
       backgroundColor: primaryColor,
       color: textColor,
       border: `1px solid ${secondaryColor}`,
-      borderRadius: "10px",
       overflow: "hidden",
-      fontFamily: "Arial, sans-serif",
-      height: "100%",
     },
     header: {
       padding: "16px",
@@ -89,8 +87,10 @@ export default function CalendarWidget({
 
   return (
     <div style={styles.container}>
+      {/* Month name and year */}
       <div style={styles.header}>{`${monthName} ${year}`}</div>
 
+      {/* Day of the week labels */}
       <div style={styles.grid}>
         {weekdays.map((day) => (
           <div key={day} style={styles.weekday}>
@@ -98,6 +98,7 @@ export default function CalendarWidget({
           </div>
         ))}
 
+        {/* Empty days */}
         {Array.from({ length: firstDay }, (_, i) => (
           <div
             key={`empty-${i}`}
@@ -108,6 +109,7 @@ export default function CalendarWidget({
           />
         ))}
 
+        {/* Actual days */}
         {Array.from({ length: daysInMonth }, (_, i) => {
           const day = i + 1;
           const isToday = day === today.getDate();
@@ -134,6 +136,7 @@ export default function CalendarWidget({
           );
         })}
 
+        {/* Trailing empty days */}
         {Array.from({ length: trailingDays }, (_, i) => {
           const borderRightStyle =
             daysInMonth + i + 1 < totalCells
